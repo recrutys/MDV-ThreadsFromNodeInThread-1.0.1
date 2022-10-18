@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template_modifications>
+  <modification type="public" template="PAGE_CONTAINER" modification_key="mdv_tfnit_add_button_in_navbar" description="Add button in navbar" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[			<xf:button class="button--plain p-nav-menuTrigger" data-xf-click="off-canvas" data-menu=".js-headerOffCanvasMenu" tabindex="0"
+				aria-label="{{ phrase('menu')|for_attr }}">
+				<i aria-hidden="true"></i>
+			</xf:button>]]></find>
+    <replace><![CDATA[$0
+
+<xf:css src="mdv_tfnit.less" />
+<xf:if is="{$template} == 'thread_view'">
+	<div class="mdv_ForumNodeSearcher--Thread">
+		<a href="{{ link('forums', $forum) }}" class="mdv_ForumNodeSearcher--Icon"><i class=" fa fa-chevron-left"></i></a>
+	</div>
+</xf:if>]]></replace>
+  </modification>
+  <modification type="public" template="thread_view" modification_key="mdv_tfnit_add_node_threads_in_thread_view" description="Add node thread list in thread_view" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<xf:if is="!$thread.isSearchEngineIndexable()">]]></find>
+    <replace><![CDATA[<xf:css src="mdv_tfnit.less" />
+<xf:css src="mdv_tfnit_thread_list_macros.less" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<xf:js>
+	$(window).scroll(function(){
+	$('.forumSearchThreadsMenu').toggleClass('is-active-fixed', $(this).scrollTop() > 0);
+	});
+
+	$('.mdv_ForumNodeSearcher--Icon').mouseenter(function()
+	{
+	$(".forumSearchThreadsMenu").addClass("is-lefter_mdv");
+	});
+
+	$('.forumSearchThreadsMenu').mouseleave(function()
+	{
+	$(".forumSearchThreadsMenu").removeClass("is-lefter_mdv")
+	}); 
+</xf:js>
+
+
+<div id="forumSearchThreadsMenu" class="forumSearchThreadsMenu">
+	<xf:foreach loop="$threads" value="$thread">
+		<xf:macro template="mdv_tfnit_thread_list_macros" name="item" arg-thread="{$thread}" />
+	</xf:foreach>
+</div>
+
+$0]]></replace>
+  </modification>
+</template_modifications>

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates>
+  <template type="public" title="mdv_tfnit.less" version_id="1000070" version_string="1.0.0"><![CDATA[.mdv_ForumNodeSearcher--Thread 
+{
+    position: absolute;
+	transition: all .25s;
+}
+
+.mdv_ForumNodeSearcher--Icon 
+{
+    position: relative;
+    right: 48px;
+    background: @xf-buttonPrimaryBg;
+	color: @xf-buttonTextColor !important;
+    border-radius: 4px;
+    transition: all .25s;
+    bottom: 8px;
+    padding: 5px 20px 5px 20px;
+    vertical-align: middle;
+}
+
+.forumSearchThreadsMenu {
+    z-index: 777;
+    background: @xf-contentBg;
+    position: absolute;
+    height: 100vh;
+    box-shadow: 0 6px 6px rgba(86, 86, 86, 0.35);
+    width: 350px;
+    left: -400px;
+    transition: all .25s;
+	overflow-y: auto;
+    top: 0;
+}
+
+.is-lefter_mdv
+{
+	left: 0;
+}
+
+.p-body 
+{
+	position: relative;
+}
+
+.is-active-fixed
+{
+	position: fixed;
+	top: 0;
+	transition: all .25s;
+}
+
+@media (max-width: 769px)
+{
+	.mdv_ForumNodeSearcher--Thread
+	{
+		display: none;
+	}
+}]]></template>
+  <template type="public" title="mdv_tfnit_thread_list_macros" version_id="1000070" version_string="1.0.0"><![CDATA[<xf:macro name="item"
+		  arg-thread="!">
+
+	<div class="structItemContainer-group--mdv js-threadList--mdv">
+		<xf:set var="$canPreview" value="{{ $thread.canPreview() }}" />
+		<a class="structItem--a--mdv" href="{{ link('threads', $thread) }}"  data-tp-primary="on" data-xf-init="{{ $canPreview ? 'preview-tooltip' : '' }}" data-preview-url="{{ $canPreview ? link('threads/preview', $thread) : '' }}">
+			<div class="structItem--mdv structItem--thread--mdv">
+				<div class="structItem-cell--mdv structItem-cell--main--mdv">
+					<div class="structItem-title--mdv">
+						{$thread.title}
+					</div>
+					<div class="structItem-minor--mdv">		
+						{{ prefix('thread', $thread, 'html', '') }}
+						<xf:username user="$thread.User" rich="true" />
+						<xf:date class="post_date" time="$thread.post_date" />
+					</div>
+				</div>
+				<div class="structItem-cell--mdv structItem-cell--latest--mdv">
+					<xf:avatar user="$thread.User" size="s" />
+				</div>
+			</div>
+		</a>
+	</div>
+</xf:macro>]]></template>
+  <template type="public" title="mdv_tfnit_thread_list_macros.less" version_id="1000070" version_string="1.0.0"><![CDATA[.structItem--mdv
+{
+	display: flex;
+	table-layout: fixed;
+	border-collapse: collapse;
+	border-top: 1px solid @xf-borderColor;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
+.structItem-cell--mdv
+{
+	display: table-cell;
+	vertical-align: top;
+	padding: 16px;
+}
+
+.structItem-cell--mdv.structItem-cell--main--mdv {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	width: 100%;
+}
+
+.structItem-cell--mdv .structItem-cell--latest--mdv
+{
+	float: right;
+}
+
+.structItemContainer-group--mdv .js-threadList--mdv
+{
+	margin: 0 7px 0px 7px;
+	transition: .3s;
+}
+
+.structItem--mdv.structItem--thread--mdv:hover
+{
+	&:hover
+	{
+		background: @xf-contentHighlightBg;
+	}
+}
+
+.structItem--a--mdv
+{
+	&:hover
+	{
+		text-decoration: none;
+	}
+}
+
+.post_date::before 
+{
+	content: "\00B7\20";
+}
+
+.structItem-title--mdv
+{
+	font-size: 20px;
+	font-weight: 500;
+	margin: 0;
+	padding: 0;
+	white-space: nowrap;
+	overflow: inherit;
+	text-overflow: ellipsis;
+}
+
+.structItem-minor--mdv
+{
+	font-size: 17px;
+	color: @xf-textColorMuted;
+	white-space: normal;
+}]]></template>
+</templates>

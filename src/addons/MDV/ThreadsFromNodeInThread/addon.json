@@ -1,0 +1,16 @@
+{
+    "legacy_addon_id": "",
+    "title": "[MDV] Threads From Node In Thread",
+    "description": "",
+    "version_id": 1000110,
+    "version_string": "1.0.1",
+    "dev": "MoonDev Studios",
+    "dev_url": "https://moondev.ru",
+    "faq_url": "",
+    "support_url": "",
+    "extra_urls": {
+        "Recruty": "https://t.me/recruty"
+    },
+    "require": [],
+    "icon": "fas fa-comment-alt"
+}
